@@ -1,11 +1,13 @@
 package org.example;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.sql.Timestamp;
+import java.util.concurrent.TimeUnit;
 
 public class MainPanel extends JPanel implements ActionListener {
 
@@ -38,8 +40,10 @@ public class MainPanel extends JPanel implements ActionListener {
         secondCurrency = new JComboBox(currency);
         secondCurrency.addActionListener(this);
 
-        submitButton = new JButton("convert");
+        ImageIcon resultIcon = new ImageIcon("media/pixel-art-game-currency-coin-vector.png");
+        submitButton = new JButton(resultIcon);
         submitButton.addActionListener(this);
+        //submitButton.setIcon(resultIcon);
 
         resultLabel = new JLabel("Result: " + calcResult);
 
@@ -57,25 +61,48 @@ public class MainPanel extends JPanel implements ActionListener {
 
     public void actionPerformed(ActionEvent e){
         if (e.getSource()==submitButton){
-            try {
-                //creating Result object to calculate result
-                Result result = new Result(
-                        (String) firstCurrency.getSelectedItem(),
-                        (String) secondCurrency.getSelectedItem(),
-                        Integer.parseInt(firstNumber.getText()));
 
-                //serialize the result to save it in the history
-                Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-                String timestampSting = timestamp.toString().replaceAll("[\\s.:]", "-");
-                Serialize.serialize(result, timestampSting);
+            submitButton.setIcon(new ImageIcon("media/coin_spin.gif"));
 
-                //update resultLabel to display the result
-                resultLabel.setText("Result: " + (calcResult = result.result) + " " + secondCurrency.getSelectedItem());
-                //System.out.println(calcResult + " " + secondCurrency.getSelectedItem());
+            new SwingWorker<Void, Void>() {
+                @Override
+                protected Void doInBackground() throws Exception{
+                    try {
+                        //creating Result object to calculate result
+                        Result result = new Result(
+                                (String) firstCurrency.getSelectedItem(),
+                                (String) secondCurrency.getSelectedItem(),
+                                Integer.parseInt(firstNumber.getText()));
 
-            } catch (IOException ex) {
-                throw new RuntimeException(ex);
-            }
+                        //serialize the result to save it in the history
+                        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+                        String timestampSting = timestamp.toString().replaceAll("[\\s.:]", "-");
+                        Serialize.serialize(result, timestampSting);
+
+                        //update resultLabel to display the result
+                        resultLabel.setText("Result: " + (calcResult = result.result) + " " + secondCurrency.getSelectedItem());
+                        //System.out.println(calcResult + " " + secondCurrency.getSelectedItem());
+
+                    } catch (IOException ex) {
+                        throw new RuntimeException(ex);
+                    } catch (NumberFormatException exception) {
+                        resultLabel.setText("No input given");
+                        submitButton.setIcon(new ImageIcon("media/pixel-art-game-currency-coin-vector.png"));
+                        throw new NumberFormatException();
+                    }
+
+                    TimeUnit.SECONDS.sleep(2);
+                    return null;
+
+                }
+
+                @Override
+                protected void done(){
+                    submitButton.setIcon(new ImageIcon("media/pixel-art-game-currency-coin-vector.png"));
+                }
+            }.execute();
+
+
 
         }
 
