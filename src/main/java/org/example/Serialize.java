@@ -31,6 +31,7 @@ public class Serialize {
         try {
             File[] files = new File("history").listFiles();
 
+            assert files != null;
             for (File filename : files) {
                 String path = filename.getPath();
                 System.out.println(path);
@@ -46,11 +47,11 @@ public class Serialize {
 
 
     public static String deserializeSingle(String path) throws IOException {
-        try {
+        final Gson gson = new Gson();
+        try (FileReader fileReader = new FileReader(path);
+            JsonReader jsonReader = new JsonReader(fileReader)) {
 
-            final Gson gson = new Gson();
-
-            Result resultObject = gson.fromJson(new JsonReader(new FileReader(path)),Result.class);
+            Result resultObject = gson.fromJson(jsonReader,Result.class);
             return resultObject.toStringDeserialize();
 
         } catch (IOException e) {

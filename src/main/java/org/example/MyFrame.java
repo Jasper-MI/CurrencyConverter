@@ -5,9 +5,16 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.io.IOException;
 
-public class MyFrame extends JFrame{
+public class MyFrame extends JFrame implements PanelReloadListener{
+
+
+
 
     public MyFrame() throws IOException {
+        initializeComponents(0,"");
+    }
+
+    public void initializeComponents(double lastCalcResult, String lastSecondCurrency) throws IOException {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         //this.setLayout(new BorderLayout());
 
@@ -22,7 +29,7 @@ public class MyFrame extends JFrame{
 
 
         //Main Panel
-        MainPanel mainPanel = new MainPanel();
+        MainPanel mainPanel = new MainPanel(this, lastCalcResult, lastSecondCurrency);
 
         //set Layout
         GridBagLayout gbl = new GridBagLayout();
@@ -41,6 +48,32 @@ public class MyFrame extends JFrame{
         this.setVisible(true);
     }
 
+//    private double getLastResult(){
+//        double lastResult;
+//
+//
+//
+//
+//
+//        return lastResult;
+//    }
+
+    @Override
+    public void reloadPanel(double lastCalcResult, String lastSecondCurrency) throws IOException {
+
+        this.getContentPane().removeAll();
+        initializeComponents(lastCalcResult, lastSecondCurrency);
+        this.revalidate();
+        this.repaint();
+
+
+        System.out.println("MyFrame reloaded");
+    }
+
+    @Override
+    public void reloadPanel() throws IOException {
+
+    }
 
 
 }

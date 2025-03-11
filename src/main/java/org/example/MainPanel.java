@@ -7,9 +7,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.sql.Timestamp;
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
-public class MainPanel extends JPanel implements ActionListener {
+public class MainPanel extends JPanel implements ActionListener{
 
 
     //Jframe elements
@@ -19,12 +20,23 @@ public class MainPanel extends JPanel implements ActionListener {
     JButton submitButton;
     JComboBox firstCurrency;
     double calcResult = 0;
+    String resultLabelCurrency;
 
     JComboBox secondCurrency;
     JLabel resultLabel;
 
+    //needed to update MyFrame when Result is added
+    private PanelReloadListener panelReloadListenerMyFrame;
 
-    public MainPanel(){
+
+    public MainPanel(PanelReloadListener panelReloadListenerMyFrame, double lastCalcResult, String lastSecondCurrency){
+        this.calcResult = lastCalcResult;
+        this.resultLabelCurrency = lastSecondCurrency;
+        initializeComponents(panelReloadListenerMyFrame);
+    }
+
+    private void initializeComponents(PanelReloadListener panelReloadListenerMyFrame) {
+        this.panelReloadListenerMyFrame = panelReloadListenerMyFrame;
 
 
 
@@ -46,7 +58,7 @@ public class MainPanel extends JPanel implements ActionListener {
         submitButton.addActionListener(this);
         //submitButton.setIcon(resultIcon);
 
-        resultLabel = new JLabel("Result: " + calcResult);
+        resultLabel = new JLabel("Result: " + calcResult + " " + resultLabelCurrency);
 
 
         //set Layout
@@ -60,19 +72,14 @@ public class MainPanel extends JPanel implements ActionListener {
         gbc.insets = new Insets(0,5,10,5);
         this.add(amountLabel, gbc);
         gbc.gridx = 1;
-        gbc.gridy = 0;
         this.add(firstNumber, gbc);
         gbc.gridx = 2;
-        gbc.gridy = 0;
         this.add(firstCurrency, gbc);
         gbc.gridx = 3;
-        gbc.gridy = 0;
         this.add(text2, gbc);
         gbc.gridx = 4;
-        gbc.gridy = 0;
         this.add(secondCurrency, gbc);
         gbc.gridx = 5;
-        gbc.gridy = 0;
         this.add(submitButton, gbc);
         gbc.gridx = 0;
         gbc.gridy = 1;
@@ -104,7 +111,14 @@ public class MainPanel extends JPanel implements ActionListener {
                         Serialize.serialize(result, timestampSting);
 
                         //update resultLabel to display the result
-                        resultLabel.setText("Result: " + (calcResult = result.result) + " " + secondCurrency.getSelectedItem());
+                        //resultLabel.setText("Result: " + (calcResult = result.result) + " " + secondCurrency.getSelectedItem());
+
+                        //timeout to show buttonanimation
+                        TimeUnit.SECONDS.sleep(2);
+                        //notify MyFrame to update
+                        panelReloadListenerMyFrame.reloadPanel((calcResult = result.result), Objects.requireNonNull(secondCurrency.getSelectedItem()).toString());
+
+
                         //System.out.println(calcResult + " " + secondCurrency.getSelectedItem());
 
                     } catch (IOException ex) {
@@ -131,4 +145,11 @@ public class MainPanel extends JPanel implements ActionListener {
         }
 
     }
+
+    public double getCalcResult() {
+        return calcResult;
+    }
+
+
+
 }
