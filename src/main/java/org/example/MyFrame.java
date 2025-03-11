@@ -9,7 +9,8 @@ public class MyFrame extends JFrame{
 
     public MyFrame() throws IOException {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setLayout(new BorderLayout());
+        //this.setLayout(new BorderLayout());
+
 
         //History Panel
         HistoryPanel historyPanel = new HistoryPanel();
@@ -23,9 +24,19 @@ public class MyFrame extends JFrame{
         //Main Panel
         MainPanel mainPanel = new MainPanel();
 
+        //set Layout
+        GridBagLayout gbl = new GridBagLayout();
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbl.setConstraints(this, gbc);
 
-        this.add(historyWrapperPanel, BorderLayout.WEST);
-        this.add(mainPanel, BorderLayout.EAST);
+        this.setLayout(gbl);
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        this.add(historyWrapperPanel, gbc);
+        gbc.gridx = 1;
+        gbc.gridy = 0;
+        gbc.anchor = GridBagConstraints.NORTH;
+        this.add(mainPanel, gbc);
         this.pack();
         this.setVisible(true);
     }

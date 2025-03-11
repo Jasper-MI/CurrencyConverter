@@ -25,7 +25,8 @@ public class MainPanel extends JPanel implements ActionListener {
 
 
     public MainPanel(){
-        //this.setLayout(new FlowLayout());
+
+
 
         amountLabel = new JLabel("Amount: ");
 
@@ -48,13 +49,36 @@ public class MainPanel extends JPanel implements ActionListener {
         resultLabel = new JLabel("Result: " + calcResult);
 
 
-        this.add(amountLabel);
-        this.add(firstNumber);
-        this.add(firstCurrency);
-        this.add(text2);
-        this.add(secondCurrency);
-        this.add(submitButton);
-        this.add(resultLabel);
+        //set Layout
+        GridBagLayout gbl = new GridBagLayout();
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbl.setConstraints(this, gbc);
+        this.setLayout(gbl);
+
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.insets = new Insets(0,5,10,5);
+        this.add(amountLabel, gbc);
+        gbc.gridx = 1;
+        gbc.gridy = 0;
+        this.add(firstNumber, gbc);
+        gbc.gridx = 2;
+        gbc.gridy = 0;
+        this.add(firstCurrency, gbc);
+        gbc.gridx = 3;
+        gbc.gridy = 0;
+        this.add(text2, gbc);
+        gbc.gridx = 4;
+        gbc.gridy = 0;
+        this.add(secondCurrency, gbc);
+        gbc.gridx = 5;
+        gbc.gridy = 0;
+        this.add(submitButton, gbc);
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        gbc.gridwidth = 6;
+        gbc.anchor = GridBagConstraints.WEST;
+        this.add(resultLabel, gbc);
         //this.setBackground(new Color(255,255,0));
         this.setVisible(true);
     }
