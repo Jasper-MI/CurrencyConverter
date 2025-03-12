@@ -6,17 +6,15 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
-import java.net.URLConnection;
-import java.util.Currency;
+
 
 public class Result {
     String firstCurrency;
     String secondCurrency;
-    public double exchangeRate = 0;
-    public double amount = 0;
-    public double result = 0;
+    public double exchangeRate;
+    public double amount;
+    public double result;
     final transient String CONNECT_API_URL = "https://openexchangerates.org/api/latest.json";
     final transient String CONNECT_API_KEY = "f7b054e08f9045c68e3766fd2c461692";
 
@@ -55,8 +53,6 @@ public class Result {
         JSONObject rates = jsonResponse.getJSONObject("rates");
         double fromRate = rates.getDouble(firstCurrency);
         double toRate = rates.getDouble(secondCurrency);
-        //System.out.println("From Rate: " + fromRate + " (" + firstCurrency + ")");
-        //System.out.println("To Rate: " + toRate + " (" + secondCurrency + ")");
         exchangeRate = fromRate / toRate;
 
         return exchangeRate;

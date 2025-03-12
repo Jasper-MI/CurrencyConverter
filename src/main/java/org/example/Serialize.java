@@ -1,14 +1,9 @@
 package org.example;
 
 import java.io.*;
-import java.lang.reflect.Type;
-import java.nio.file.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Stream;
-
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
 
 public class Serialize {
@@ -26,7 +21,7 @@ public class Serialize {
     }
 
 
-    public static List<Result> deserializeAll() throws IOException {
+    public static List<Result> deserializeAll(){
         List<Result> resultList = new ArrayList<>();
         try {
             File[] files = new File("history").listFiles();
@@ -46,7 +41,7 @@ public class Serialize {
     }
 
 
-    public static String deserializeSingle(String path) throws IOException {
+    public static String deserializeSingle(String path){
         final Gson gson = new Gson();
         try (FileReader fileReader = new FileReader(path);
             JsonReader jsonReader = new JsonReader(fileReader)) {

@@ -1,11 +1,9 @@
 package org.example;
 
-import java.io.IOException;
-
 public class Main {
 
 
-    public static void main(String[] args) throws IOException {
-        MyFrame myFrame = new MyFrame();
+    public static void main(String[] args){
+        new MyFrame();
     }
 }

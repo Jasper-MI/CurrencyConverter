@@ -4,11 +4,6 @@ package org.example;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
-import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class Testing {
 

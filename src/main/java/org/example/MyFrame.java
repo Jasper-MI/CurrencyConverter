@@ -3,24 +3,22 @@ package org.example;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
-import java.io.IOException;
 
 public class MyFrame extends JFrame implements PanelReloadListener{
 
 
 
 
-    public MyFrame() throws IOException {
-        initializeComponents(0,"");
+    public MyFrame(){
+        initializeComponents(0,"", "");
     }
 
-    public void initializeComponents(double lastCalcResult, String lastSecondCurrency) throws IOException {
+    public void initializeComponents(double lastCalcResult, String lastSecondCurrency, String placeHolderFirstNumber){
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        //this.setLayout(new BorderLayout());
 
 
         //History Panel
-        HistoryPanel historyPanel = new HistoryPanel();
+        HistoryPanel historyPanel = new HistoryPanel(this);
         historyPanel.setBorder(new EmptyBorder(10,10,10,10));
 
         JPanel historyWrapperPanel = new JPanel(); //Outer
@@ -29,7 +27,7 @@ public class MyFrame extends JFrame implements PanelReloadListener{
 
 
         //Main Panel
-        MainPanel mainPanel = new MainPanel(this, lastCalcResult, lastSecondCurrency);
+        MainPanel mainPanel = new MainPanel(this, lastCalcResult, lastSecondCurrency, placeHolderFirstNumber);
 
         //set Layout
         GridBagLayout gbl = new GridBagLayout();
@@ -48,31 +46,24 @@ public class MyFrame extends JFrame implements PanelReloadListener{
         this.setVisible(true);
     }
 
-//    private double getLastResult(){
-//        double lastResult;
-//
-//
-//
-//
-//
-//        return lastResult;
-//    }
-
     @Override
-    public void reloadPanel(double lastCalcResult, String lastSecondCurrency) throws IOException {
+    public void reloadPanel(double lastCalcResult, String lastSecondCurrency, String placeHolderFirstNumber){
 
         this.getContentPane().removeAll();
-        initializeComponents(lastCalcResult, lastSecondCurrency);
+        initializeComponents(lastCalcResult, lastSecondCurrency, placeHolderFirstNumber);
         this.revalidate();
         this.repaint();
-
 
         System.out.println("MyFrame reloaded");
     }
 
     @Override
-    public void reloadPanel() throws IOException {
-
+    public void reloadPanel(){
+        this.getContentPane().removeAll();
+        initializeComponents(0, "", "");
+        this.revalidate();
+        this.repaint();
+        System.out.println("MyFrame reloaded");
     }
 
 
