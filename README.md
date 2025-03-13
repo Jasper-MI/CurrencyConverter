@@ -18,13 +18,12 @@ Zudem verfügt der Währungsumrechner über einen Verlauf, in welchem die vergan
 ## Anwendung
 
 1. Betrag eingeben
-   ![Screenshot 2025-03-13 121753](https://github.com/user-attachments/assets/898a2980-1509-4adf-b0a3-00d769c4ce38)
+   ![Screenshot 2025-03-13 202339](https://github.com/user-attachments/assets/0047a24d-a428-4237-81d4-479f4fef7deb)
 2. Erste Währung auswählen (von der ausgegangen werden soll)
-   ![Screenshot 2025-03-13 121819](https://github.com/user-attachments/assets/46154a89-886e-44ca-843d-90941ae01bef)
+   ![Screenshot 2025-03-13 202356](https://github.com/user-attachments/assets/d3617696-5807-4c06-8b3b-d7f7eacf4aab)
 3. Zweite Währung wählen (in welche umgerechnet werden soll)
-   ![Screenshot 2025-03-13 121902](https://github.com/user-attachments/assets/2c1f8fc4-c032-49ca-9271-170a4bfed2d2)
+   ![Screenshot 2025-03-13 202411](https://github.com/user-attachments/assets/4830c102-d0f9-457c-942c-74c3d8e1effb)
 4. Umrechnung starten
-   ![Screenshot 2025-03-13 122820](https://github.com/user-attachments/assets/0d25b18b-d635-419c-91b7-dbf9ed90eaeb)
+   ![Screenshot 2025-03-13 202429](https://github.com/user-attachments/assets/4e77107b-3f71-4434-a09b-fdbadd9648cb)
 5. Optional: Verlauf löschen
-   ![Screenshot 2025-03-13 122820](https://github.com/user-attachments/assets/58d6e4a8-f971-4826-8f9d-b102d2354f72)
-
+   ![Screenshot 2025-03-13 202429](https://github.com/user-attachments/assets/22330704-ce0b-4152-9036-d63dc2f81fe6)
