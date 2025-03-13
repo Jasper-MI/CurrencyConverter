@@ -8,8 +8,10 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-
+//This class is calculating the result
 public class Result {
+
+    //set up some variables
     String firstCurrency;
     String secondCurrency;
     public double exchangeRate;
@@ -31,7 +33,11 @@ public class Result {
         //System.out.println(this);
     }
 
+    //this methode sets the exchange rate via using an API
     public double setExchangeRate(String firstCurrency, String secondCurrency) throws IOException {
+
+        //API call
+        //connecting to API
         String urlString = CONNECT_API_URL + "?app_id=" + CONNECT_API_KEY + "&symbols=" + firstCurrency + "," + secondCurrency;
         URL url = new URL(urlString);
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
@@ -49,15 +55,19 @@ public class Result {
         connection.disconnect();
         //System.out.println(content);
 
+        //reading the values received by the API
         JSONObject jsonResponse = new JSONObject(content.toString());
         JSONObject rates = jsonResponse.getJSONObject("rates");
         double fromRate = rates.getDouble(firstCurrency);
         double toRate = rates.getDouble(secondCurrency);
-        exchangeRate = fromRate / toRate;
+
+        //set exchange rate
+        exchangeRate = toRate / fromRate;
 
         return exchangeRate;
     }
 
+    //this methode is calculating the result by multiplying the amount with the exchange rate
     public double calcResult(double amount, double exchangeRate) {
         return amount * exchangeRate;
     }

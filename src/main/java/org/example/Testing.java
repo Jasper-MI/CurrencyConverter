@@ -2,11 +2,12 @@ package org.example;
 
 
 import org.junit.jupiter.api.Test;
-
 import java.io.IOException;
 
+//some testing
 public class Testing {
 
+    //this test tests the deserializeAll methode
     @org.junit.jupiter.api.Test
     public void testDeserializeAll() throws IOException {
 
@@ -26,6 +27,7 @@ public class Testing {
         System.out.println(Serialize.deserializeAll());
     }
 
+    //this test tests the deserializeSingle methode
     @Test
     public void testDeserializeSingle() throws IOException {
         Result result = new Result("AED", "CAD", 60);

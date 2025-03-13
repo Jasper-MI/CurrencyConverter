@@ -9,10 +9,10 @@ import java.sql.Timestamp;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
+//MainPanel where the input and the result is displayed
 public class MainPanel extends JPanel implements ActionListener{
 
-
-    //Jframe elements
+    //JFrame elements (used later)
     JLabel amountLabel;
     JLabel text2;
     JTextField firstNumber;
@@ -29,6 +29,7 @@ public class MainPanel extends JPanel implements ActionListener{
     private PanelReloadListener panelReloadListenerMyFrame;
 
 
+
     public MainPanel(PanelReloadListener panelReloadListenerMyFrame, double lastCalcResult, String lastSecondCurrency, String placeHolderFirstNumber){
         this.calcResult = lastCalcResult;
         this.resultLabelCurrency = lastSecondCurrency;
@@ -38,7 +39,6 @@ public class MainPanel extends JPanel implements ActionListener{
 
     private void initializeComponents(PanelReloadListener panelReloadListenerMyFrame) {
         this.panelReloadListenerMyFrame = panelReloadListenerMyFrame;
-
 
 
         amountLabel = new JLabel("Amount: ");
@@ -56,8 +56,8 @@ public class MainPanel extends JPanel implements ActionListener{
 
         ImageIcon resultIcon = new ImageIcon("media/pixel-art-game-currency-coin-vector.png");
         submitButton = new JButton(resultIcon);
+        submitButton.setBackground(new Color(87, 199, 83));
         submitButton.addActionListener(this);
-        //submitButton.setIcon(resultIcon);
 
         resultLabel = new JLabel("Result: " + calcResult + " " + resultLabelCurrency);
 
@@ -69,7 +69,8 @@ public class MainPanel extends JPanel implements ActionListener{
         this.setLayout(gbl);
 
         gbc.gridx = 0;
-        gbc.gridy = 0;
+        gbc.gridy = 1;
+        gbc.gridwidth = 1;
         gbc.insets = new Insets(0,5,10,5);
         this.add(amountLabel, gbc);
         gbc.gridx = 1;
@@ -83,7 +84,7 @@ public class MainPanel extends JPanel implements ActionListener{
         gbc.gridx = 5;
         this.add(submitButton, gbc);
         gbc.gridx = 0;
-        gbc.gridy = 1;
+        gbc.gridy = 2;
         gbc.gridwidth = 6;
         gbc.anchor = GridBagConstraints.WEST;
         this.add(resultLabel, gbc);
@@ -112,16 +113,11 @@ public class MainPanel extends JPanel implements ActionListener{
                         String timestampSting = timestamp.toString().replaceAll("[\\s.:]", "-");
                         Serialize.serialize(result, timestampSting);
 
-                        //update resultLabel to display the result
-                        //resultLabel.setText("Result: " + (calcResult = result.result) + " " + secondCurrency.getSelectedItem());
-
-                        //timeout to show buttonanimation
+                        //timeout to show button animation
                         TimeUnit.SECONDS.sleep(2);
                         //notify MyFrame to update
                         panelReloadListenerMyFrame.reloadPanel((calcResult = result.result), Objects.requireNonNull(secondCurrency.getSelectedItem()).toString(), firstNumber.getText());
 
-
-                        //System.out.println(calcResult + " " + secondCurrency.getSelectedItem());
 
                     } catch (IOException ex) {
                         throw new RuntimeException(ex);
