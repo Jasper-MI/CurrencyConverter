@@ -24,6 +24,7 @@ Zudem verfügt der Währungsumrechner über einen Verlauf, in welchem die vergan
 3. Zweite Währung wählen (in welche umgerechnet werden soll)
    ![Screenshot 2025-03-13 121902](https://github.com/user-attachments/assets/2c1f8fc4-c032-49ca-9271-170a4bfed2d2)
 4. Umrechnung starten
-   ![Screenshot 2025-03-13 121924](https://github.com/user-attachments/assets/29b75282-4887-49d0-8bc9-fa7015158982)
+   ![Screenshot 2025-03-13 122820](https://github.com/user-attachments/assets/0d25b18b-d635-419c-91b7-dbf9ed90eaeb)
 5. Optional: Verlauf löschen
-   ![Screenshot 2025-03-13 121924](https://github.com/user-attachments/assets/b851cd0d-bd98-47d9-8b82-1f47f3437dc2)
+   ![Screenshot 2025-03-13 122820](https://github.com/user-attachments/assets/58d6e4a8-f971-4826-8f9d-b102d2354f72)
+
